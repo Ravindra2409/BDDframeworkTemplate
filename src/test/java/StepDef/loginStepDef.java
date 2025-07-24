@@ -4,6 +4,8 @@ import ActionPages.loginActionPage;
 import Base.testbase;
 import io.cucumber.java.en.Given;
 
+import java.util.concurrent.TimeUnit;
+
 import static Base.testbase.driver;
 
 
@@ -15,9 +17,19 @@ public class loginStepDef {
         // Write code here that turns the phrase above into concrete actions
         testbase objbase=new testbase();
         objbase.loadconfig();
-        objbase.IntialiZeBrowser("QA");
+        objbase.IntialiZeBrowser("Prod");
 
        System.out.println("Navigated");
+        System.setProperty("webdriver.chrome.driver","C:\\Program Files\\Java\\Selenium\\chromedriver.exe");
+
+         driver.get("https://www.demo.guru99.com/V4/");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(2000, TimeUnit.MILLISECONDS);
+        System.out.println("Navigated to URL");
+        objloginActionPage=new loginActionPage(driver);
+        objloginActionPage.VerifyLoginpage();
+        System.out.println("Login page verified");
+
     }
     @Given("User enter ID and Password")
     public void user_enter_id_and_password() {
